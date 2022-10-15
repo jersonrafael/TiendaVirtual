@@ -1,0 +1,62 @@
+nav{
+	display: flex;
+	justify-content: center;
+}
+/*SLIDER*/
+.btn-carrito:hover{
+	color: #fff;
+	background-color: #6fe91e;
+}
+
+.slider{
+
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.ul_li{
+    display: flex;
+    padding: 0;
+    width: 400%;
+    
+    animation: cambio 20s infinite alternate;
+}
+
+.li_sli{
+
+    list-style: none;
+    width: 100%;
+}
+
+.img_sli{
+
+    width: 100%;
+}
+
+@keyframes cambio{  
+
+    0% {margin-left: 0;}
+    20% {margin-left: 0;}
+    
+    25% {margin-left: -100%;}
+    45% {margin-left: -100%;}
+
+    50% {margin-left: -200%}
+    70% {margin-left: -200%;}
+    75% {margin-left: -300%;}
+    100% {margin-left: -300%;}
+     
+
+}
+
+/*BARRA DE BUSQUEDA*/
+
+.span{
+	font-size: 24px;
+}
+
+.h4_precio{
+	font-size: 14px;
+}
+
