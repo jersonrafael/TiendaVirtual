@@ -1,144 +1,106 @@
+<?php
+    include("../login/db.php");
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/editar.css">
+    <title>Document</title>
+</head>
 <?php 
 
-    include("../../config/conexion.php");
+    if (isset($_POST['actualizar'])) {
+        //CUANDO LE DE CLICK EN ACTUALIZAR
+        $id=$_POST['id'];
+        $nombre=$_POST['nombre'];
+        $cantidad=$_POST['cantidad'];
+        $descripcion=$_POST['descripcion'];
+        $precio_rebajado=$_POST['precio_rebajado'];
 
-?>
+        //HACER EL UPDATE
+        $sql = "UPDATE productos SET nombre='".$nombre."', cantidad='".$cantidad."', descripcion='".$descripcion."', precio_rebajado='".$precio_rebajado."' WHERE id='".$id."' ";
 
+        $resultado =mysqli_query($conexion, $sql);
 
-
- <?php
-
-        if (isset($_POST['actualizar'])) {
-          // AQUI ES CUANDO YA SE PRECIONO EL BOTON DE ENVIAR
-
-          $nombre=$_POST['nombre'];
-          $descripcion=$_POST['descripcion'];
-          $precio_rebajado=$_POST['p_rebajado'];
-          $cantidad=$_POST['cantidad'];
-          $categoria=$_POST['categoria'];
-
-          // ACTUALIZAR PRODUCTOS
-
-          $sql="UPDATE productos SET nombre='".$nombre."', descripcion='".$descripcion."', precio='".$precio."', precio_rebajado='".$precio_rebajado."', cantidad='".$cantidad."', categoria='".$categoria."' ";
-
-          $resultado = mysqli_query($conexion, $sql);
-
-            if ($resultado) {
-                  
-                  echo "<script language='JavaScript'> 
-
-                          alert('Los datos se actualizaron Correctamente');
-
-                          location.assing('productos.php');
-
-                        </script>;
-
-          ";
-
-            }else{
-              echo "<script language='JavaScript'> 
-
-                      alert('Los datos no actualizaron Correctamente');
-
-                      location.assing('productos.php');
-
-                    </script>;
-
-          ";
-
-            }
-
+        if($resultado){
+            echo "<script language='JavaScript'>alert('Actualizacion Correcta'); location.assing('../admin/productos.php');</script>";
+            
         }else{
-          // CUANDO AUN NO SE PRECIONA EL BOTON
+            echo "<script language='JavaScript'>alert('Error'); location.assing('index.php');</script>";
+            
+        }
 
-          $id=$_GET['id'];
-          $sql="SELECT * FROM productos WHERE id= '".$id."' ";
-          $resultado=mysqli_query($conexion, $sql); 
+        mysqli_close($conexion);
+    }else{
+        //SI NO SE HA REALIZADO CLICK EN ACTUALIZAR
+        $id=$_GET['id'];
+        $sql="SELECT * FROM productos WHERE id='".$id."'";
+        $resultado = mysqli_query($conexion,$sql);
 
+        $fila=mysqli_fetch_assoc($resultado);
 
-          $row = mysqli_fetch_assoc($resultado);
+        $nombre=$fila["nombre"];
+        $cantidad=$fila["cantidad"];
+        $descripcion=$fila["descripcion"];
+        $precio_rebajado=$fila["precio_rebajado"];
 
-          $nombre=$row['nombre'];
-          $descripcion=$row['descripcion'];
-          $precio_rebajado=$row['precio_rebajado'];
-          $cantidad=$row['cantidad'];
-          $categoria=$row['id_categoria'];
+        mysqli_close($conexion);
 
-          mysqli_close($conexion);
-
-
-        };
-
-        { 
 ?>
-
-<link rel="stylesheet" type="text/css" href="../assets/css/editar.css">
-
+<body>
 <div class="container_principal">
-  <h2>HOla</h2>
   <form name="formulario" action="<?=$_SERVER['PHP_SELF']?>" method="post">
       <table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th hidden scope="col">id</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Descripcion</th>
-      <th scope="col">Precio</th>
-      <th scope="col">Cantidad</th>
-      <th scope="col">Categoria</th>
-      <th scope="col">Imagen</th>
+            <tr>
+                <td hidden scope="col">id</td>
+                <td scope="col">Nombre</td>
+                <td scope="col">Descripcion</td>
+                <td scope="col">Precio</td>
+                <td scope="col">Cantidad</td>
+                <td scope="col">Categoria</td>
+                <td scope="col">Imagen</td>
+            </tr>
+
+            <tr>
+
+                <td hidden class="id"> 
+                    <input id="id" class="form-control" type="hidden" name="id" value="<?php echo $id; ?>" required>
+                </td>
+
+                <td class="nombre"> 
+                    <input id="nombre" class="form-control" type="text" name="nombre" value="<?php echo $nombre; ?>" required>
+                </td>
+
+                <td class="Descripcion" >  
+                    <input id="descripcion" class="form-control" name="descripcion" value="<?php echo $descripcion; ?>" rows="3" required resizable="none"></textarea> 
+                </td>
+
+                <td class="Precio_rebaja"> 
+                    <input id="p_rebajado" class="form-control" type="text" name="precio_rebajado" value="<?php echo $precio_rebajado; ?>" required>
+                </td>
+
+                <td class="cantidad"> 
+                    <input id="cantidad" class="form-control" type="text" name="cantidad" value="<?php echo $cantidad; ?>" required>
+                </td>
+
+        <td class="Categoria"> 
+                <label for="categoria">Categoria</label>
+                <select id="categoria" class="form-control" name="categoria">
+                    
+                </select>
+        </td>
     </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-
-      <td hidden class="id"> 
-        <input id="id" class="form-control" type="hidden" name="id" value="<?php echo $id; ?>" required>
-      </td>
-
-      <td class="nombre"> 
-        <input id="nombre" class="form-control" type="text" name="nombre" value="<?php echo $nombre; ?>" required>
-      </td>
-
-      <td class="Descripcion" >  
-        <input id="descripcion" class="form-control" name="descripcion" value="<?php echo $descripcion; ?>" rows="3" required resizable="none"></textarea> 
-    </td>
-
-      <td class="Precio_rebaja"> 
-        <input id="p_rebajado" class="form-control" type="text" name="p_rebajado" value="<?php echo $precio_rebajado; ?>" required>
-      </td>
-
-      <td class="cantidad"> 
-        <input id="cantidad" class="form-control" type="text" name="cantidad" value="<?php echo $cantidad; ?>" required>
-      </td>
-
-      <td class="Categoria"> 
-        <label for="categoria">Categoria</label>
-        
-       <select id="categoria" class="form-control" name="categoria">
-          <?php
-          $categorias = mysqli_query($conexion, "SELECT * FROM categorias");
-          foreach ($categorias as $cat) { ?>
-          <option value="<?php echo $cat['id']; ?>"><?php echo $cat['categoria']; ?></option>
-          <?php } ?>
-        </select>
-      </td>
-      <td>
-        <input type="submit" name="actualizar" value="Actualizar" class="btn-submit">
-      </td>
-    </tr>
-  </tbody>
-</table>
-      
-  </form>
+ </table>
+ <input type="submit" value="actualizar" name="actualizar">
+</form>
 </div>
-
-
-<?php 
-
-} 
-
+<?php
+  }
 ?>
+</body>
+</html>
 
 
