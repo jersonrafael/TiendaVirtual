@@ -83,9 +83,7 @@ include("includes/header.php"); ?>
                                     <button class="btn btn-danger" type="submit">Eliminar</button>
                                 </form>
 
-                                <form method="post" class="" action="../admin_control/editar/editar.php?accion=pro&id=<?php echo $data['id']; ?>"> 
-                                    <button class="btn btn-warning" type="submit">Editar</button>
-                                </form>
+                                <a class="btn btn-warning" href="../admin_control/editar/editar.php?accion=pro&id=<?php echo $data['id']; ?>">Editar</a>
                             </td>
                         </tr>
                     <?php } ?>
