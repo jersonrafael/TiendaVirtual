@@ -24,10 +24,10 @@ if(isset($_POST['add_to_cart'])){
    $select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
 
    if(mysqli_num_rows($select_cart) > 0){
-      $message[] = 'product already added to cart!';
+      $message[] = 'Este producto ya se encuentra en el carrito!';
    }else{
       mysqli_query($conn, "INSERT INTO `cart`(user_id, name, price, image, quantity) VALUES('$user_id', '$product_name', '$product_price', '$product_image', '$product_quantity')") or die('query failed');
-      $message[] = 'product added to cart!';
+      $message[] = 'Producto agregado al carrito!';
    }
 
 };
@@ -36,7 +36,7 @@ if(isset($_POST['update_cart'])){
    $update_quantity = $_POST['cart_quantity'];
    $update_id = $_POST['cart_id'];
    mysqli_query($conn, "UPDATE `cart` SET quantity = '$update_quantity' WHERE id = '$update_id'") or die('query failed');
-   $message[] = 'cart quantity updated successfully!';
+   $message[] = 'Cantidad actualizada correctamente!';
 }
 
 if(isset($_GET['remove'])){
@@ -58,10 +58,13 @@ if(isset($_GET['delete_all'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>shopping cart</title>
+   <title>Carrito de compras</title>
 
    <!-- custom css file link  -->
    <link rel="stylesheet" href="css/style.css">
+
+   <!-- ESTILO DEL BUSCADOR -->
+   <link href="assets/css/buscador.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
@@ -90,14 +93,25 @@ if(isset($message)){
    <div class="flex">
       <a href="login.php" class="btn">login</a>
       <a href="register.php" class="option-btn">register</a>
-      <a href="index.php?logout=<?php echo $user_id; ?>" onclick="return confirm('are your sure you want to logout?');" class="delete-btn">logout</a>
+      <a href="index.php?logout=<?php echo $user_id; ?>" onclick="return confirm('Deseas cerrar sesion?');" class="delete-btn">logout</a>
    </div>
 
 </div>
 
+<!-- TODOS LOS PRODUCTOS -->
+
 <div class="products">
 
-   <h1 class="heading">latest products</h1>
+   <h1 class="heading">Productos</h1>
+
+   <!-- BUSQUEDA DE PRODUCTOS -->
+
+      <div class="barraBusqueda">
+            <input id="buscador" name="buscador" placeholder="Buscar....." type="text">
+            </input>
+      </div>
+
+   <!--  -->
 
    <div class="box-container">
 
@@ -106,15 +120,15 @@ if(isset($message)){
       if(mysqli_num_rows($select_product) > 0){
          while($fetch_product = mysqli_fetch_assoc($select_product)){
    ?>
-      <form method="post" class="box" action="">
+      <form method="post" class="box articulo" action="">
          <img alt="..." class="" src="assets/img/<?php echo $fetch_product['imagen']; ?>">
          <div class="name"><?php echo $fetch_product['nombre']; ?></div>
-         <div class="price">$<?php echo $fetch_product['precio_rebajado']; ?>/-</div>
+         <div class="price">$<?php echo $fetch_product['precio_rebajado']; ?></div>
          <input type="number" min="1" name="cantidad" value="1">
          <input type="hidden" name="imagen" value="<?php echo $fetch_product['imagen']; ?>">
          <input type="hidden" name="nombre" value="<?php echo $fetch_product['nombre']; ?>">
          <input type="hidden" name="precio_rebajado" value="<?php echo $fetch_product['precio_rebajado']; ?>">
-         <input type="submit" value="add to cart" name="add_to_cart" class="btn">
+         <input type="submit" value="Agregar al carrito" name="add_to_cart" class="btn">
       </form>
    <?php
       };
@@ -125,18 +139,20 @@ if(isset($message)){
 
 </div>
 
+<!-- CARRITO DE COMPRAS -->
+
 <div class="shopping-cart">
 
-   <h1 class="heading">shopping cart</h1>
+   <h1 class="heading">Carrito de compras</h1>
 
    <table>
       <thead>
-         <th>image</th>
-         <th>name</th>
-         <th>price</th>
-         <th>quantity</th>
-         <th>total price</th>
-         <th>action</th>
+         <th>Imagen</th>
+         <th>Nombre</th>
+         <th>Precio</th>
+         <th>Cantidad</th>
+         <th>Precio Total</th>
+         <th>#</th>
       </thead>
       <tbody>
       <?php
@@ -148,39 +164,41 @@ if(isset($message)){
          <tr>
             <td><img alt="..." class="image" src="assets/img/<?php echo $fetch_cart['image']; ?>" height="100"></td>
             <td><?php echo $fetch_cart['name']; ?></td>
-            <td>$<?php echo $fetch_cart['price']; ?>/-</td>
+            <td>$ <?php echo $fetch_cart['price']; ?></td>
             <td>
                <form action="" method="post">
                   <input type="hidden" name="cart_id" value="<?php echo $fetch_cart['id']; ?>">
                   <input type="number" min="1" name="cart_quantity" value="<?php echo $fetch_cart['quantity']; ?>">
-                  <input type="submit" name="update_cart" value="update" class="option-btn">
+                  <input type="submit" name="update_cart" value="cambiar" class="option-btn">
                </form>
             </td>
-            <td>$<?php echo $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?>/-</td>
-            <td><a href="index.php?remove=<?php echo $fetch_cart['id']; ?>" class="delete-btn" onclick="return confirm('remove item from cart?');">remove</a></td>
+            <td>$<?php echo $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?></td>
+            <td><a href="index.php?remove=<?php echo $fetch_cart['id']; ?>" class="delete-btn" onclick="return confirm('Eliminar elemento del Carrito?');">Quitar del carrito</a></td>
          </tr>
       <?php
          $grand_total += $sub_total;
             }
          }else{
-            echo '<tr><td style="padding:20px; text-transform:capitalize;" colspan="6">no item added</td></tr>';
+            echo '<tr><td style="padding:20px; text-transform:capitalize;" colspan="6">No se agrego al carrito</td></tr>';
          }
       ?>
       <tr class="table-bottom">
          <td colspan="4">grand total :</td>
-         <td>$<?php echo $grand_total; ?>/-</td>
-         <td><a href="index.php?delete_all" onclick="return confirm('delete all from cart?');" class="delete-btn <?php echo ($grand_total > 1)?'':'disabled'; ?>">delete all</a></td>
+         <td>$<?php echo $grand_total; ?></td>
+         <td><a href="index.php?delete_all" onclick="return confirm('Deseas Vaciar el Carrito?');" class="delete-btn <?php echo ($grand_total > 1)?'':'disabled'; ?>">Limpiar el carrito</a></td>
       </tr>
    </tbody>
    </table>
 
    <div class="cart-btn">  
-      <a href="#" class="btn <?php echo ($grand_total > 1)?'':'disabled'; ?>">proceed to checkout</a>
+      <a href="#" class="btn <?php echo ($grand_total > 1)?'':'disabled'; ?>">Completar pago</a>
    </div>
 
 </div>
 
 </div>
+   <!-- SCRIPT DEL BUSCADOR -->
 
+   <script src="assets/js/buscador1.js"></script>
 </body>
 </html>
