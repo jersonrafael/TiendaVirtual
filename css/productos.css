@@ -1,0 +1,128 @@
+/*VARIABLES DE COLOR*/
+:root{
+	--blanco: #fff;
+	--azul-claro: #8ECAE6;
+	--azul-medio: #219EBC;
+	--azul-oscuro: #023047;
+	--naranja-claro: #FFB703;
+	--naranja-oscuro: #FB8500;
+}
+
+/*ESTILOS GLOBALES*/
+
+/*ESTILOS DE LA CABEZERA*/
+
+.contenedor-header{
+	padding: 10px;
+	background-color: var(--azul-oscuro);
+}
+
+.contenedor-header h2{
+	color: var(--blanco);
+	display: inline-block;
+}
+
+.elementos-header{
+	float: right;
+}
+
+.sobre-nosotros{
+	display: inline-block;
+	margin: 0px 10px;
+}
+
+.datos-usuario{
+	display: inline-block;
+		margin: 0px 10px 0px 0px;
+}
+
+.datos-usuario p{
+	display: inline-block;
+	color: var(--blanco);
+	float: top;
+}
+
+.datos-usuario p b{
+
+	font-size: 15px;
+
+	border-radius: 5px;
+
+	position: relative;
+}
+
+.datos-usuario span{
+}
+
+/*ESTILO DEL CONTENEDOR DEL AREA DE LOS PRODUCTOS*/
+.products{
+
+}
+
+/*ESTILO DEL TITULO DE LA PARTE DE LOS CARRITO*/
+
+/*#titulo-producto{
+	text-align: center;
+	color: red;
+}*/
+
+/*ESTILOS DE LA CARD DE LOS PRODUCTOS*/
+
+/*#contenedor-productos{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.articulos{
+
+	border: 1px solid red;
+	
+	width: 10rem;
+	height: 24rem;
+
+	margin: 0px 15px;
+	
+}
+
+ESTILOS DE LOS PRODUCTOS
+.img{
+
+	outline: 1px solid red;
+	width: 100%;
+	height: 60%;
+}
+
+.img img{
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	outline: 1px solid red;
+}
+.nombre{
+
+	text-align: center;
+	font-size: 1.2rem;
+	color: var(--naranja-oscuro);
+}
+
+.descripcion{
+
+	text-align: center;
+	color: var(--naranja-oscuro);
+}
+
+b{
+	font-size: 0.5rem;
+	float: left;
+	margin-left: 15%;
+}
+
+.precio{
+	font-size: 1rem;
+}
+
+.cantidad{
+	width: 50px;
+}*/

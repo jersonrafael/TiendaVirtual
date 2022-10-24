@@ -1,0 +1,60 @@
+<div class="modal-content shopping-cart">
+
+   <div class="modal-header">
+      <h1 class="modal-tittle heading">Carrito de compras</h1>
+   </div>
+
+   <div class="modal-body">
+         <table>
+      <thead>
+         <th>Imagen</th>
+         <th>Nombre</th>
+         <th>Precio</th>
+         <th>Cantidad</th>
+         <th>Precio Total</th>
+         <th>#</th>
+      </thead>
+      <tbody>
+      <?php
+         $cart_query = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
+         $grand_total = 0;
+         if(mysqli_num_rows($cart_query) > 0){
+            while($fetch_cart = mysqli_fetch_assoc($cart_query)){
+      ?>
+         <tr>
+            <td><img class="card-img-top" src="assets/img/<?php echo $fetch_cart['image']; ?>" alt="..." style="height: 220px;"></td>
+            <td><?php echo $fetch_cart['name']; ?></td>
+            <td>$<?php echo $fetch_cart['price']; ?></td>
+            <td>
+               <form action="" method="post">
+                  <input type="hidden" name="cart_id" value="<?php echo $fetch_cart['cart_id']; ?>">
+                  <input type="number" min="1" name="cart_quantity" value="<?php echo $fetch_cart['quantity']; ?>">
+                  <input type="submit" name="update_cart" value="actualizar" class="option-btn">
+               </form>
+            </td>
+            <td>$<?php echo $sub_total = ($fetch_cart['price'] * $fetch_cart['quantity']); ?></td>
+            <td><a href="index.php?remove=<?php echo $fetch_cart['id']; ?>" class="delete-btn" onclick="return confirm('Eliminar Producto del Carrito?');">Eliminar</a></td>
+         </tr>
+      <?php
+         $grand_total += $sub_total;
+            }
+         }else{
+            echo '<tr><td style="padding:20px; text-transform:capitalize;" colspan="6">no item added</td></tr>';
+         }
+      ?>
+      <tr class="table-bottom">
+         <td colspan="4">Total de la compra :</td>
+         <td>$<?php echo $grand_total; ?></td>
+         <td><a href="index.php?delete_all" onclick="return confirm('Seguro que Desea Limpiar el Carrito?');" class="delete-btn <?php echo ($grand_total > 1)?'':'disabled'; ?>">Limpiar</a></td>
+      </tr>
+   </tbody>
+   </table>
+   </div>
+
+  <div class="modal-footer">
+      <div class="cart-btn" >  
+         <a href="#" class="btn <?php echo ($grand_total > 1)?'':'disabled'; ?>">Completar Pago</a>
+      </div>
+  </div>
+
+</div>

@@ -1,0 +1,33 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+
+/*Header*/
+
+#dropdown{
+
+	border-radius: 20px;
+}
+.contenedor-header{
+	display: flex;
+	justify-content: space-between;
+	
+}
+
+.datos-usuario{
+
+}
+
+.nombre-usuario{
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+}
+
+.cerrar-session{
+	margin: 0;
+	padding: 0;
+}

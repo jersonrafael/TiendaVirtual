@@ -1,0 +1,32 @@
+/*ESTILOS DEL BUSCADOR*/
+
+.barraBusqueda{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 45px;
+}
+
+.barraBusqueda input{
+
+    width: 60%;
+    height: 40px;
+    padding: 15px;
+}
+
+/*ESTILOS DE LOS ARTICULOS*/
+
+#listaArticulos{
+    font-size: 30px;
+    margin-top: 20px;
+    list-style: none;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: center;
+}
+li{
+    margin: 5px 0;
+}
+/*FILTRO DE CUANDO NO SE ENCUENTRA ARTICULO*/
+.filtro{
+    display: none;
+}
