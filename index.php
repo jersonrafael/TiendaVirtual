@@ -61,7 +61,11 @@ if(isset($_GET['delete_all'])){
    <title>Carrito de compras</title>
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+   <!-- <link rel="stylesheet" href="css/style.css"> -->
+
+   <!-- ESTILOS MIOS -->
+
+   <link rel="stylesheet" type="text/css" href="css/productos.css">
 
    <!-- ESTILO DEL BUSCADOR -->
    <link href="assets/css/buscador.css" rel="stylesheet" type="text/css">
@@ -97,6 +101,25 @@ if(isset($message)){
    </div>
 
 </div>
+
+   <!-- SLIDER-->
+
+    <header>
+
+        <div class="slider">
+            <ul class="ul_li">
+                <li class="li_sli"><img src="assets/img/slider_img/1FB.jpg" id="1" class="img_sli"></li>
+                
+                <li class="li_sli"><img src="assets/img/slider_img/2FB.jpg" id="2" class="img_sli"></li>
+                
+                <li class="li_sli"><img src="assets/img/slider_img/3FB.jpg" id="3" class="img_sli"></li>
+
+                <li class="li_sli"><img src="assets/img/slider_img/4FB.jpg" id="4" class="img_sli"></li>
+            </ul>
+        </div>
+    </header>
+
+   <!--  -->
 
 <!-- TODOS LOS PRODUCTOS -->
 

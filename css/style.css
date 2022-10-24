@@ -81,7 +81,7 @@ body{
    background-color: var(--orange);
 }
 
-.form-container{
+/*.form-container{
    min-height: 100vh;
    display: flex;
    align-items: center;
@@ -127,9 +127,9 @@ body{
 
 .form-container form p a:hover{
    text-decoration: underline;
-}
+}*/
 
-.container{
+/*.container{
    padding:0 20px;
    margin:0 auto;
    max-width: 1200px;
@@ -297,4 +297,4 @@ body{
    .container .products .box-container .box img{
       height: 200px;
    }
-} 
+} */
