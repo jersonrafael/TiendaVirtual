@@ -1,0 +1,41 @@
+[33mcommit 2ecb3da947345253e97c07c5e989745cbbbbfd12[m[33m ([m[1;36mHEAD -> [m[1;32mEditarArticulos[m[33m)[m
+Author: Jerson Rafael <jersonrafael800@hotmail.com>
+Date:   Mon Oct 24 15:19:06 2022 -0400
+
+    Slider Agregado, se quitaron todos los estilos
+
+[33mcommit 4f9369a5d27a8511e2507ad0d78679fb133e6083[m
+Author: Jerson Rafael <jersonrafael800@hotmail.com>
+Date:   Mon Oct 24 15:10:04 2022 -0400
+
+    Cambios en la base de datos, idioma de las alertas y demas cambios
+
+[33mcommit a082ef8ccc46a136809f2a371a11c3baf5cd3d67[m
+Author: Jerson Rafael <jersonrafael800@hotmail.com>
+Date:   Mon Oct 24 14:34:30 2022 -0400
+
+    Estado Base Proyecto
+
+[33mcommit 90e5daf85e2e9a94ec0303fa816f7e479b1fc861[m
+Author: Fish.Code <jrrvgamer@gmail.com>
+Date:   Sun Oct 16 15:25:15 2022 -0430
+
+    Edicion Correcta
+
+[33mcommit f0ae8324d83f90e09247d30b9eb9439830b0e874[m
+Author: Fish.Code <jrrvgamer@gmail.com>
+Date:   Sun Oct 16 12:42:52 2022 -0430
+
+    Base de la edicion del producto
+
+[33mcommit 1caa1eb61ef8af2c99284ee69919296f07a3b54d[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: kaito <jersonrafael800@hotmail.com>
+Date:   Sat Oct 15 15:04:26 2022 -0400
+
+    first commit
+
+[33mcommit f84ba2e68a1843b67a3880415e39fea9649fb5b4[m
+Author: kaito <jersonrafael800@hotmail.com>
+Date:   Sat Oct 15 14:53:55 2022 -0400
+
+    Base principal del proyecto
