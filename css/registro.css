@@ -1,0 +1,155 @@
+/*FUENTES*/
+@font-face{
+
+	font-family: 'Amazon-Ember-Regular';
+	src: url('../assets/fonts/Amazon-Ember-Regular.ttf') format('truetype');
+	font-style:normal;
+	font-weight: normal;
+}
+
+/*VARIABLES*/
+
+:root{
+
+	--blanco-bordes:#DDDDDD ;
+	--blanco: #fff;
+	--blanco-boton: #E0E3E8;
+	--azul-claro: #8ECAE6;
+	--azul-medio: #219EBC;
+	--azul-oscuro: #023047;
+	--naranja-claro: #FFB703;
+	--naranja-oscuro: #FB8500;
+	--rojo-claro: #ff5b46;
+
+	/*FUENTES*/
+
+	--amazon: Amazon-Ember-Regular;
+}
+
+/*ESTILOS GLOBALES*/
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: var(--amazon);
+}
+
+/*CONTENEDOR*/
+
+.container{
+	display: flex ;
+	justify-content: center;
+	background: ;
+	margin: 2% 0%;
+}
+
+.form-container{
+
+	width: 30%;
+
+	border-radius: 5px;
+	border: 1px solid var(--blanco-bordes);
+
+	/*height: 26rem;*/
+
+}
+
+.form-container h2{
+
+	margin-top: 8px;
+	text-align: center;
+}
+
+.form-container a{
+
+	text-decoration: none;
+	color: var(--naranja-claro);
+}
+
+
+.form-container h3{
+
+	margin-top: 8px;
+	font-size: 2rem;
+}
+
+.form-container form{
+
+	background: #fff;
+	padding: 0.8rem 1rem;
+
+	margin: 0% 0%;
+}
+
+/*ESTILOS DEL FORM*/
+
+.form-container p{
+	text-align: center;
+
+}
+
+
+.form-container span{
+	
+}
+
+input{
+
+	display: block;
+	margin: 0 auto;
+
+	width: 90%;
+	height: 2rem;
+
+	padding: 2px 4px;
+
+	border: none;
+	outline: none;
+
+	border: 1px solid var(--blanco-bordes);
+	border-radius: 5px;
+}
+
+.contenedor-nombre,.contenedor-correo, .contenedor-clave{
+	margin-top: 20px;
+
+}
+
+.btn{
+
+	background-color:var(--naranja-claro);
+
+	border: 1px solid var(--naranja-oscuro);
+	border-radius: 5px;
+
+	margin-top: 15px;
+}
+
+.footer-card{
+	margin-top: 2rem;
+}
+
+.login-link{
+
+	text-decoration: none;
+	color: var(--azul-oscuro);
+
+	margin-left: 10px;
+}
+
+/*PSEUDO CLASES*/
+
+.btn:hover{
+
+	transition: background .15s;
+	background-color: var(--naranja-oscuro);
+	border-color: var(--naranja-claro);
+}
+
+
+input:focus{
+
+	border-color: var(--naranja-claro);
+	box-shadow: 0px 0px 5px 1px var(--naranja-oscuro);
+}

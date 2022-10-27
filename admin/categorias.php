@@ -37,9 +37,9 @@ include("includes/header.php");
                                 <form method="post" action="eliminar.php?accion=cli&id=<?php echo $data['id']; ?>" class="d-inline eliminar">
                                     <button class="btn btn-danger" type="submit">Eliminar</button>
                                 </form>
-                                 <form method="post" action="editar.php?accion=pro&id=<?php echo $data['id']; ?>" class="d-inline eliminar">
+                                <!--  <form method="post" action="editar.php?accion=pro&id=<?php echo $data['id']; ?>" class="d-inline eliminar">
                                     <button class="btn btn-success" type="submit">Editar</button>
-                                </form>
+                                </form> -->
                             </td>
                         </tr>
                     <?php } ?>

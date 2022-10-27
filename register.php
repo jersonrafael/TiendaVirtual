@@ -32,7 +32,10 @@ if(isset($_POST['submit'])){
    <title>register</title>
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+   <!-- <link rel="stylesheet" href="css/style.css"> -->
+
+   <!-- ESTILOS REGISTRO  -->
+   <link rel="stylesheet" type="text/css" href="css/registro.css">
 
 </head>
 <body>
@@ -44,18 +47,42 @@ if(isset($message)){
    }
 }
 ?>
-   
+<div class="container">
+ 
 <div class="form-container">
-
+         
+         <h2><a href="pasarela.php">SUPLYMAX</a></h2>
    <form action="" method="post">
-      <h3>register now</h3>
-      <input type="text" name="name" required placeholder="enter username" class="box">
-      <input type="email" name="email" required placeholder="enter email" class="box">
-      <input type="password" name="password" required placeholder="enter password" class="box">
-      <input type="password" name="cpassword" required placeholder="confirm password" class="box">
-      <input type="submit" name="submit" class="btn" value="register now">
-      <p>already have an account? <a href="login.php">login now</a></p>
+
+      <h3>Crear cuenta</h3>
+      
+      <div class="contenedor-nombre">
+         <span>Tu nombre</span>
+         <input type="text" name="name" required placeholder="" class="box" autocomplete="off">
+      </div>
+
+     <div class="contenedor-correo">
+         <span>Correo Electronico</span>
+         <input type="email" name="email" required placeholder="" class="box" autocomplete="off">
+     </div>
+
+      <div class="contenedor-clave">
+         <span>Contraseña</span>
+         <input type="password" name="password" required placeholder="" class="box" autocomplete="off">
+         <br>
+         <span>Vuelve a escribir la contraseña</span>
+         <input type="password" name="cpassword" required placeholder="" class="box" autocomplete="off">
+      </div>
+
+      <input type="submit" name="submit" class="btn" value="Registrate">
+
+      <div class="footer-card">
+         <p class="cuenta-existente">¿Ya tienes una cuenta?<a class="login-link" href="login.php">Iniciar sesión</a></p>
+      </div>
+      
    </form>
+
+</div>
 
 </div>
 

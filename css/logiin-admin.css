@@ -1,0 +1,112 @@
+@font-face{
+
+	font-family: 'Amazon-Ember-Regular';
+	src: url('../assets/fonts/Amazon-Ember-Regular.ttf') format('truetype');
+	font-style:normal;
+	font-weight: normal;
+}
+
+/*VARIABLES DE COLORES*/
+:root{
+
+	--blanco-bordes:#DDDDDD ;
+	--blanco: #fff;
+	--blanco-boton: #E0E3E8;
+	--azul-claro: #8ECAE6;
+	--azul-medio: #219EBC;
+	--azul-oscuro: #023047;
+	--naranja-claro: #FFB703;
+	--naranja-oscuro: #FB8500;
+	--rojo-claro: #ff5b46;
+
+	/*FUENTES*/
+
+	--amazon: Amazon-Ember-Regular;
+}
+
+*{
+	font-family: var(--amazon);
+}
+
+/*CONTENEDORES*/
+
+.container-flex{
+	display: flex;
+	justify-content: center;
+	margin: 5% 0%;
+}
+
+.container-form{
+
+	padding: 10px;
+	border: 1px solid var(--blanco-bordes);
+	border-radius: 5px;
+}
+
+.container-nombre input, .container-clave input{
+	display: block;
+	border: none;
+
+	border: 1px solid var(--blanco-bordes);
+	border-radius: 2px;
+
+	width: 20rem;
+	height: 2rem;
+}
+
+.entrar{
+
+	transition: background .15s;
+
+	border: none;
+	border: 1px solid var(--naranja-oscuro);
+	border-radius: 5px;
+	background-color: var(--naranja-claro);
+
+	margin: 10px 25% 25px 25%;
+	padding: 0.5rem 4rem;
+}
+
+.volver{
+
+	text-decoration: none;
+
+	color: var(--azul-oscuro);
+	border: none;
+	border: 1px solid var(--blanco-boton);
+	border-radius: 5px;
+	background-color: var(--blanco-bordes);
+
+	margin: 0px 32%;
+	padding: 0.5rem 2rem;
+}
+
+span{
+
+	margin: 0 18%;
+	text-align: center;
+	color: var(--naranja-oscuro);
+	font-size: 1rem;
+}
+
+.container-nombre, .container-clave{
+	margin: 0 2%;
+}
+
+/*PSEUDO CLASES*/
+
+.container-nombre input:focus, .container-clave input:focus{
+	
+	border: none;
+	outline: none;
+
+	border-color: var(--naranja-claro);
+	box-shadow: 0px 0px 5px 1px var(--naranja-oscuro);
+}
+
+.entrar:hover{
+
+	transition: background .15s;
+	background-color: var(--naranja-oscuro);
+	border-color: var(--naranja-claro);
+}

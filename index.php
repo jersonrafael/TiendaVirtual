@@ -5,13 +5,13 @@ session_start();
 $user_id = $_SESSION['user_id'];
 
 if(!isset($user_id)){
-   header('location:login.php');
+   header('location:pasarela.php');
 };
 
 if(isset($_GET['logout'])){
    unset($user_id);
    session_destroy();
-   header('location:login.php');
+   header('location:pasarela.php');
 };
 
 if(isset($_POST['add_to_cart'])){
@@ -24,10 +24,10 @@ if(isset($_POST['add_to_cart'])){
    $select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
 
    if(mysqli_num_rows($select_cart) > 0){
-      $message[] = 'Este producto ya se encuentra en el carrito!';
+      $message[] = '<script>alert("Este producto ya se encuentra en el carrito!")</script>';
    }else{
       mysqli_query($conn, "INSERT INTO `cart`(user_id, name, price, image, quantity) VALUES('$user_id', '$product_name', '$product_price', '$product_image', '$product_quantity')") or die('query failed');
-      $message[] = 'Producto agregado al carrito!';
+      $message[] = '<script>alert("Producto agregado al carrito")</script>';
    }
 
 };
@@ -36,7 +36,7 @@ if(isset($_POST['update_cart'])){
    $update_quantity = $_POST['cart_quantity'];
    $update_id = $_POST['cart_id'];
    mysqli_query($conn, "UPDATE `cart` SET quantity = '$update_quantity' WHERE id = '$update_id'") or die('query failed');
-   $message[] = 'Cantidad actualizada correctamente!';
+   $message[] = '<script>alert("Cantidad actualizada correctamente!")</script>';
 }
 
 if(isset($_GET['remove'])){
@@ -66,7 +66,6 @@ if(isset($_GET['delete_all'])){
    <!-- ESTILOS MIOS -->
 
    <link rel="stylesheet" type="text/css" href="css/productos.css">
-
    <!-- ESTILO DEL BUSCADOR -->
    <link href="assets/css/buscador.css" rel="stylesheet" type="text/css">
 
@@ -83,7 +82,11 @@ if(isset($message)){
 
 <div class="container">
 
+<div class="contenedor-header">
+
 <div class="user-profile">
+
+   <h2>SUPLYMAX</h2>
 
    <?php
       $select_user = mysqli_query($conn, "SELECT * FROM `user_form` WHERE id = '$user_id'") or die('query failed');
@@ -92,13 +95,22 @@ if(isset($message)){
       };
    ?>
 
-   <p> username : <span><?php echo $fetch_user['name']; ?></span> </p>
-   <p> email : <span><?php echo $fetch_user['email']; ?></span> </p>
-   <div class="flex">
-      <a href="login.php" class="btn">login</a>
-      <a href="register.php" class="option-btn">register</a>
-      <a href="index.php?logout=<?php echo $user_id; ?>" onclick="return confirm('Deseas cerrar sesion?');" class="delete-btn">logout</a>
+   <!-- <p> email : <span><?php //echo $fetch_user['email']; ?></span> </p> -->
+
+
+   <div class="acciones-usuario">
+      <!-- <a href="login.php" class="btn">login</a>
+      <a href="register.php" class="option-btn">register</a> -->
+      <a href="index.php?logout=<?php echo $user_id; ?>" onclick="return confirm('Deseas cerrar sesion?');" class="delete-btn">Cerrar Sesion</a>
    </div>
+
+   <button class="btn-carrito verCarrito"><img src="assets/icons/carticon.png" style="width: 1.5rem; height: 1.5rem;"> Ver Carrito</button>
+   <a href="categorias.php" class="categorias" hidden>Ver las categorias</a>
+
+     <p><b>Hola </b><span><?php echo $fetch_user['name']; ?></span> </p>
+
+
+</div>
 
 </div>
 
@@ -130,28 +142,35 @@ if(isset($message)){
    <!-- BUSQUEDA DE PRODUCTOS -->
 
       <div class="barraBusqueda">
-            <input id="buscador" name="buscador" placeholder="Buscar....." type="text">
+            <input id="buscador" name="buscador" placeholder="Buscar....." type="text" autocomplete="off">
             </input>
       </div>
 
-   <!--  -->
+   <!-- CARTA PRODUCTOS -->
 
    <div class="box-container">
+
 
    <?php
       $select_product = mysqli_query($conn, "SELECT * FROM `productos`") or die('query failed');
       if(mysqli_num_rows($select_product) > 0){
          while($fetch_product = mysqli_fetch_assoc($select_product)){
    ?>
-      <form method="post" class="box articulo" action="">
+      <form method="post" class="box articulo" action="" >
+         <div class="imagenContainer">
          <img alt="..." class="" src="assets/img/<?php echo $fetch_product['imagen']; ?>">
-         <div class="name"><?php echo $fetch_product['nombre']; ?></div>
-         <div class="price">$<?php echo $fetch_product['precio_rebajado']; ?></div>
-         <input type="number" min="1" name="cantidad" value="1">
-         <input type="hidden" name="imagen" value="<?php echo $fetch_product['imagen']; ?>">
-         <input type="hidden" name="nombre" value="<?php echo $fetch_product['nombre']; ?>">
-         <input type="hidden" name="precio_rebajado" value="<?php echo $fetch_product['precio_rebajado']; ?>">
-         <input type="submit" value="Agregar al carrito" name="add_to_cart" class="btn">
+         </div>
+
+         <div class="info-producto">
+            <div class="name"><?php echo $fetch_product['nombre']; ?></div>
+            <div class="price">$<?php echo $fetch_product['precio_rebajado']; ?></div>
+            <input class="cantidad" type="number" min="1" name="cantidad" value="1" autocomplete="off">
+            <input type="hidden" name="imagen" value="<?php echo $fetch_product['imagen']; ?>">
+            <input type="hidden" name="nombre" value="<?php echo $fetch_product['nombre']; ?>">
+            <input type="hidden" name="precio_rebajado" value="<?php echo $fetch_product['precio_rebajado']; ?>">
+            <input type="submit" value="Agregar al carrito" name="add_to_cart" class="btn-agregar">
+         </div>
+
       </form>
    <?php
       };
@@ -163,6 +182,10 @@ if(isset($message)){
 </div>
 
 <!-- CARRITO DE COMPRAS -->
+
+<div class="modal">
+
+<div class="modalContainer">
 
 <div class="shopping-cart">
 
@@ -187,11 +210,11 @@ if(isset($message)){
          <tr>
             <td><img alt="..." class="image" src="assets/img/<?php echo $fetch_cart['image']; ?>" height="100"></td>
             <td><?php echo $fetch_cart['name']; ?></td>
-            <td>$ <?php echo $fetch_cart['price']; ?></td>
+            <td>$<?php echo $fetch_cart['price']; ?></td>
             <td>
                <form action="" method="post">
                   <input type="hidden" name="cart_id" value="<?php echo $fetch_cart['id']; ?>">
-                  <input type="number" min="1" name="cart_quantity" value="<?php echo $fetch_cart['quantity']; ?>">
+                  <input class="cantidad-carrito" type="number" min="1" name="cart_quantity" value="<?php echo $fetch_cart['quantity']; ?>">
                   <input type="submit" name="update_cart" value="cambiar" class="option-btn">
                </form>
             </td>
@@ -202,26 +225,33 @@ if(isset($message)){
          $grand_total += $sub_total;
             }
          }else{
-            echo '<tr><td style="padding:20px; text-transform:capitalize;" colspan="6">No se agrego al carrito</td></tr>';
+            echo '<tr><td style="padding:20px; text-transform:capitalize;" colspan="6">Tu carrito se encuentra vacio</td></tr>';
          }
       ?>
       <tr class="table-bottom">
-         <td colspan="4">grand total :</td>
+         <td colspan="4">Total de la compra :</td>
          <td>$<?php echo $grand_total; ?></td>
          <td><a href="index.php?delete_all" onclick="return confirm('Deseas Vaciar el Carrito?');" class="delete-btn <?php echo ($grand_total > 1)?'':'disabled'; ?>">Limpiar el carrito</a></td>
       </tr>
    </tbody>
    </table>
 
-   <div class="cart-btn">  
-      <a href="#" class="btn <?php echo ($grand_total > 1)?'':'disabled'; ?>">Completar pago</a>
+   <div class="cart-btn"> 
+      <a href="#" class="cerrar">Cerrar y seguir comprando</a> 
+      <a href="reporteFactura.php" class="btn <?php echo ($grand_total > 1)?'':'disabled'; ?>">Completar pago</a>
    </div>
 
 </div>
 
 </div>
+</div>
+</div>
    <!-- SCRIPT DEL BUSCADOR -->
 
    <script src="assets/js/buscador1.js"></script>
+
+   <!-- SCRIPT MODAL -->
+
+   <script src="assets/js/modal.js"></script>
 </body>
 </html>

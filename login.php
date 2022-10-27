@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
       $_SESSION['user_id'] = $row['id'];
       header('location:index.php');
    }else{
-      $message[] = 'Contrase;a o Correo Electronico incorrecto!';
+      $message[] = '<script>alert("DATOS")</script>';
    }
 
 }
@@ -31,10 +31,44 @@ if(isset($_POST['submit'])){
    <title>Login</title>
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="css/style.css">
+   <!-- <link rel="stylesheet" href="css/style.css"> -->
+
+   <!-- ESTILOS LOGIN -->
+
+   <link rel="stylesheet" type="text/css" href="css/logiin.css">
 
 </head>
 <body>
+
+<div class="container">
+   
+<div class="form-container">
+
+   <h2><a href="pasarela.php">SUPLYMAX</a></h2>
+
+   <form action="" method="post">
+      <h3>Iniciar sesión</h3>
+
+      <div class="contenedor-correo">
+          <label>Direccion de correo electronico</label>
+          <input type="email" name="email" required placeholder="" class="box correo" autocomplete="off">
+      </div>
+      <div class="contenedor-clave">
+         <label>Contraseña</label>
+         <input type="password" name="password" required placeholder="" class="box clave" autocomplete="off">
+      </div>
+      <input type="submit" name="submit" class="btn" value="Continuar">
+   </form>
+   <p class="texto-registro">¿Eres nuevo en Suplymax?
+      <a href="register.php" class="btn-registro">Registrate</a>
+
+       <p class="texto-registro admin">¿Eres otro tipo de usuario?
+      <a href="admin_control/login/index.php" class="btn-registro btn-admin">Iniciar sesión</a>
+   </p>
+</div>
+
+</div>
+
 
 <?php
 if(isset($message)){
@@ -43,18 +77,6 @@ if(isset($message)){
    }
 }
 ?>
-   
-<div class="form-container">
-
-   <form action="" method="post">
-      <h3>Empieza a comprar inicia sesion</h3>
-      <input type="email" name="email" required placeholder="Email" class="box">
-      <input type="password" name="password" required placeholder="Clave" class="box">
-      <input type="submit" name="submit" class="btn" value="login">
-      <p>No tienes cuenta? <a href="register.php">Registrate</a></p>
-   </form>
-
-</div>
 
 </body>
 </html>
